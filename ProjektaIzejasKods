@@ -21,7 +21,6 @@ def minet():
     except:
         rezultats.config(text="Ievadi skaitli!")
 
-
 def jauna_spele():
     global skaitlis
     skaitlis = random.randint(1, 100)
@@ -36,10 +35,8 @@ def jauna_spele():
     restart.pack_forget()
     exit_poga.pack_forget()
 
-
 def iziet():
     logs.destroy()
-
 
 def spele():
     global logs, entry, poga, rezultats, teksts, restart, exit_poga, skaitlis
@@ -92,11 +89,9 @@ def spele():
 
     logs.mainloop()
 
-
 def sakt_spelet():
     titullapa.destroy()
     spele()
-
 
 titullapa = tk.Tk()
 titullapa.title("Minēšanas spēle")
