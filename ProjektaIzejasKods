@@ -1,8 +1,6 @@
 import tkinter as tk
 import random
 
-skaitlis = random.randint(1, 100)
-
 def minet():
     try:
         lietotaja = int(entry.get())
@@ -14,28 +12,113 @@ def minet():
         else:
             rezultats.config(text="Pareizi! Tu uzvarēji!")
 
+            entry.pack_forget()
+            poga.pack_forget()
+            teksts.pack_forget()
+
+            restart.pack()
+
     except:
         rezultats.config(text="Ievadi skaitli!")
 
 
-logs = tk.Tk()
-logs.title("Minēšanas spēle")
+def jauna_spele():
+    global skaitlis
+    skaitlis = random.randint(1, 100)
 
-teksts = tk.Label(logs, text="Uzmini skaitli (1–100)", font=("Verdana", 20))
-teksts.pack(pady=20)
+    entry.pack()
+    poga.pack()
+    teksts.pack()
 
-entry = tk.Entry(logs, font=("Verdana", 18))
-entry.pack(pady=10)
+    rezultats.config(text="")
+    entry.delete(0, tk.END)
 
-poga = tk.Button(
-    logs,
-    text="Minēt",
-    font=("Verdana", 16),
-    command=minet
+    restart.pack_forget()
+    exit_poga.pack_forget()
+
+
+def iziet():
+    logs.destroy()
+
+
+def spele():
+    global logs, entry, poga, rezultats, teksts, restart, exit_poga, skaitlis
+
+    skaitlis = random.randint(1, 100)
+
+    logs = tk.Tk()
+    logs.title("Minēšanas spēle")
+    logs.attributes("-fullscreen", True)
+
+    logs.bind("<Escape>", lambda e: logs.attributes("-fullscreen", False))
+
+    teksts = tk.Label(logs, text="Uzmini skaitli (1–100)", font=("Verdana", 20))
+    teksts.pack(pady=20)
+
+    entry = tk.Entry(logs, font=("Verdana", 18))
+    entry.pack(pady=10)
+
+    poga = tk.Button(
+        logs,
+        text="Minēt",
+        font=("Verdana", 16),
+        bg="blue",
+        fg="white",
+        command=minet
+    )
+    poga.pack(pady=10)
+
+    rezultats = tk.Label(logs, text="", font=("Verdana", 18))
+    rezultats.pack(pady=20)
+
+    restart = tk.Button(
+        logs,
+        text="Spēlēt vēlreiz",
+        font=("Verdana", 16),
+        bg="green",
+        fg="white",
+        command=jauna_spele
+    )
+
+    exit_poga = tk.Button(
+        logs,
+        text="Padoties",
+        font=("Verdana", 16),
+        bg="red",
+        fg="white",
+        command=iziet
+    )
+    exit_poga.pack(pady=10)
+
+    logs.mainloop()
+
+
+def sakt_spelet():
+    titullapa.destroy()
+    spele()
+
+
+titullapa = tk.Tk()
+titullapa.title("Minēšanas spēle")
+titullapa.attributes("-fullscreen", True)
+
+titullapa.bind("<Escape>", lambda e: titullapa.attributes("-fullscreen", False))
+
+virsraksts = tk.Label(
+    titullapa,
+    text="Minēšanas spēle",
+    font=("Verdana", 40, "bold")
 )
-poga.pack(pady=10)
+virsraksts.pack(pady=100)
 
-rezultats = tk.Label(logs, text="", font=("Verdana", 18))
-rezultats.pack(pady=20)
+start_poga = tk.Button(
+    titullapa,
+    text="Sākt spēli",
+    font=("Verdana", 20),
+    bg="orange",
+    fg="white",
+    command=sakt_spelet
+)
+start_poga.pack()
 
-logs.mainloop()
+titullapa.mainloop()
