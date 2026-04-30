@@ -1,1 +1,21 @@
+import random
 
+skaitlis = random.randint(1, 100)
+
+print("Minēšanas spēle")
+print("Uzmini skaitli no 1 līdz 100")
+
+while True:
+    try:
+        lietotaja = int(input("Ievadi skaitli: "))
+
+        if lietotaja < skaitlis:
+            print("Par mazu!")
+        elif lietotaja > skaitlis:
+            print("Par lielu!")
+        else:
+            print("Pareizi! Tu uzvarēji!")
+            break
+
+    except:
+        print("Ievadi skaitli!")
